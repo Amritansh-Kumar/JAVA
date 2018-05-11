@@ -38,4 +38,6 @@ abstract public class Entity {
 
         return this.isVisible && other.isVisible && this.rect.intersects(other.rect);
     }
+
+
 }

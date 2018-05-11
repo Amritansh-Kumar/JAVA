@@ -6,21 +6,21 @@ import mypackage.main.GamePanel;
 import mypackage.resources.Resources;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class WelcomeScreen extends Screen {
 
+
     public WelcomeScreen(GamePanel panel) {
         super(panel);
-        Resources.pappuPakiaAudio.loop();
+//        Resources.pappuPakiaAudio.loop();
     }
 
     private Pappu mPappu = new Pappu(54, 301);
 
-
-
-
     public void update() {
-        Resources.pappuPakiaAudio.play();
+
+//        Resources.pappuPakiaAudio.play();
     }
 
     public void draw(Graphics g) {
@@ -32,16 +32,20 @@ public class WelcomeScreen extends Screen {
        g.drawImage(Resources.plankTop, 664, 240, null);
        g.drawImage(Resources.plankMiddle, 664, 340, null);
 
+        // displaying the current score
         g.setColor(Color.black);
         g.setFont(new Font("Ravie", Font.BOLD, 50));
         g.drawString(this.gPanel.score+"", 20, 50);
 
+
+        // displaying the final score
         if (this.gPanel.displayScore){
             g.setColor(Color.black);
             g.setFont(new Font("Ravie", Font.BOLD, 50));
             g.drawString("Your Score: "+this.gPanel.finalScore, 235, 180);
         }
 
+        // displaying the starting screen
        g.setColor(new Color(91, 31, 51));
        g.setFont(new Font("Ravie", Font.BOLD, 70));
        g.drawString("PAPPU PAKIA", 180, 100);
@@ -72,10 +76,13 @@ public class WelcomeScreen extends Screen {
     }
 
 
+    // starting the game or going to the settings screen
     @Override
     public void onMousePress(int xCord, int yCord) {
         Rectangle startRect = new Rectangle(664, 240, 213, 70);
         Rectangle settingsRect = new Rectangle(664, 340, 213, 70);
+
+        // optimize this code
         if (startRect.contains(xCord, yCord)){
             this.gPanel.gameOn = true;
             this.gPanel.score = 0;
@@ -89,5 +96,17 @@ public class WelcomeScreen extends Screen {
             this.gPanel.currentScreen = new SettingsScreen(this.gPanel);
         }
 
+    }
+
+    // starting the game
+    @Override
+    public void onKeyPress(int keyCode) {
+        super.onKeyPress(keyCode);
+        if (keyCode == KeyEvent.VK_ENTER){
+            this.gPanel.gameOn = true;
+            this.gPanel.score = 0;
+            this.gPanel.displayScore = false;
+            this.gPanel.currentScreen = new Stage1Screen(this.gPanel);
+        }
     }
 }

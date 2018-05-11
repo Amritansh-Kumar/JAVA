@@ -34,7 +34,7 @@ public class GamePanel extends JPanel implements KeyListener, Runnable, MouseLis
         super.addNotify();
 
         Resources.load();
-//        Resources.pappuPakiaAudio.play();
+//        Resources.pappuPakiaGameplayAudio.loop();
         Resources.pappuPakiaAudio.loop();
 
         this.currentScreen = new WelcomeScreen(this);
@@ -71,7 +71,7 @@ public class GamePanel extends JPanel implements KeyListener, Runnable, MouseLis
             scoreUpdater++;
             if(scoreUpdater % 100 == 0 && this.gameOn){
                 scoreUpdater = 0;
-                score += 5;
+                score += 15;
             }
 
             this.currentScreen.update();

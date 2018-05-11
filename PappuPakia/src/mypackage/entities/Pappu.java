@@ -8,13 +8,9 @@ import java.util.List;
 
 public class Pappu extends Entity {
 
-
-
     public List<Image> allImages = new ArrayList<>();
     public int imageIndex = 0;
     private boolean collided = false;
-//    public boolean pappuisFalling = true;
-
 
     public Pappu(int x, int y) {
         super(x, y);
@@ -36,15 +32,9 @@ public class Pappu extends Entity {
 
     public void update() {
         super.update();
-
-//        if(this.pappuisFalling) {
-//            this.image = Resources.fallingPappu;
-////            this.pappuisFalling = true;
-//        } else {
             this.imageIndex++;
             this.imageIndex %= 8;
             this.image = this.allImages.get(this.imageIndex);
-//        }
     }
 
     public void fly(){
